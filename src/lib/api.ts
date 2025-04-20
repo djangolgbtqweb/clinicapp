@@ -57,5 +57,25 @@ export async function fetchAntenatalPostnatalRecords() {
     if (!res.ok) throw new Error("Failed to fetch family planning");
     return res.json();
   }
-  
+ // ——— Counseling ———
+export async function fetchCounselingSessions() {
+  const res = await fetch(`${API}/counseling/counseling-sessions/`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch counseling sessions");
+  return res.json();
+}
+export async function fetchHealthEducationLogs() {
+  const res = await fetch(`${API}/counseling/health-education-logs/`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch education logs");
+  return res.json();
+}
+export async function fetchPrivateNotes() {
+  const res = await fetch(`${API}/counseling/private-notes/`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch private notes");
+  return res.json();
+}
+export async function fetchFollowUpReminders() {
+  const res = await fetch(`${API}/counseling/follow-up-reminders/`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch follow-up reminders");
+  return res.json();
+} 
 
