@@ -47,7 +47,7 @@ export default function FollowUpsPage() {
         <Link href="/counseling" className="text-gray-600 hover:text-gray-900">
           <ArrowLeft />
         </Link>
-        <h1 className="text-2xl font-bold text-teal-700">Follow-Up Reminders</h1>
+        <h1 className="text-1xl font-bold text-teal-700">Follow-Up Reminders</h1>
       </div>
 
       {/* Reminders Grid */}
@@ -116,3 +116,4 @@ export default function FollowUpsPage() {
     </div>
   );
 }
+
