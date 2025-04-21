@@ -12,7 +12,7 @@ export default function Dashboard() {
           <a href="/outpatient" className="block hover:text-cyan-400">Outpatient</a>
           <a href="/maternal-child" className="block hover:text-cyan-400">Maternal & Child</a>
           <a href="/counseling" className="block hover:text-cyan-400">Counseling</a>
-          <a href="/minor_theater" className="block hover:text-cyan-400">Minor Theater</a>
+          <a href="/minor-theater" className="block hover:text-cyan-400">Minor Theater</a>
           <a href="/nutrition" className="block hover:text-cyan-400">Nutrition</a>
           <a href="/emergency" className="block hover:text-cyan-400">Emergency</a>
           <a href="/chronic_disease_management" className="block hover:text-cyan-400">Chronic Disease</a>

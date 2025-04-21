@@ -78,4 +78,39 @@ export async function fetchFollowUpReminders() {
   if (!res.ok) throw new Error("Failed to fetch follow-up reminders");
   return res.json();
 } 
+// ——— minor theator  ———
+export async function fetchSurgeries() {
+  const res = await fetch(`${API}/surgeries/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch surgeries');
+  return res.json();
+}
 
+export async function fetchOperationRecords() {
+  const res = await fetch(`${API}/operation-records/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch operation records');
+  return res.json();
+}
+
+export async function fetchEquipment() {
+  const res = await fetch(`${API}/equipment/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch equipment');
+  return res.json();
+}
+
+export async function fetchPostOpFollowUps() {
+  const res = await fetch(`${API}/post-op-followups/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch post-op follow-ups');
+  return res.json();
+}
+export const fetchEquipmentTracking = async () => {
+  try {
+    const response = await fetch('/api/minor-theater/equipment-tracking'); // Adjust the endpoint accordingly
+    if (!response.ok) {
+      throw new Error('Failed to fetch equipment tracking data');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
