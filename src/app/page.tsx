@@ -19,7 +19,7 @@ export default function Dashboard() {
 
           <div className="mt-4 text-xs uppercase text-gray-400">Diagnostics</div>
           <a href="/laboratory" className="block hover:text-cyan-400">Laboratory</a>
-          <a href="/stis" className="block hover:text-cyan-400">STIs</a>
+          <a href="/sti" className="block hover:text-cyan-400">STIs</a>
 
           <div className="mt-4 text-xs uppercase text-gray-400">Medication</div>
           <a href="/pharmacy" className="block hover:text-cyan-400">Pharmacy</a>
