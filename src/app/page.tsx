@@ -16,7 +16,6 @@ export default function Dashboard() {
           <a href="/nutrition" className="block hover:text-cyan-400">Nutrition</a>
           <a href="/emergency" className="block hover:text-cyan-400">Emergency</a>
           <a href="/chronic_disease_management" className="block hover:text-cyan-400">Chronic Disease</a>
-          <a href="/triage_vitals" className="block hover:text-cyan-400">Triage & Vitals</a>
 
           <div className="mt-4 text-xs uppercase text-gray-400">Diagnostics</div>
           <a href="/laboratory" className="block hover:text-cyan-400">Laboratory</a>

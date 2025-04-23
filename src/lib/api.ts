@@ -266,3 +266,24 @@ export async function fetchFollowUps() {
   if (!res.ok) throw new Error('Failed to fetch follow-ups');
   return res.json();
 }
+
+
+const LAB_API = `${API}/laboratory`;
+
+export async function fetchLabTests() {
+  const res = await fetch(`${LAB_API}/lab-tests/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch lab tests');
+  return res.json();
+}
+
+export async function fetchSampleTracking() {
+  const res = await fetch(`${LAB_API}/sample-tracking/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch sample tracking');
+  return res.json();
+}
+
+export async function fetchLabResults() {
+  const res = await fetch(`${LAB_API}/lab-results/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch lab results');
+  return res.json();
+}
