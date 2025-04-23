@@ -7,7 +7,7 @@ export default function NutritionPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-lime-50 via-white to-green-50 pb-20">
       {/* Back to Dashboard Link */}
-      <div className="flex justify-end px-6 py-4">
+      <div className="flex justify-front px-6 py-4">
         <Link href="/" className="text-black hover:text-purple-800 font-bold text-bg bg-white/70 hover:bg-white/90 px-4 py-2 transition duration-200">
           ← Back Clinic System
         </Link>

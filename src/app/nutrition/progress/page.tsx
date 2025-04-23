@@ -30,7 +30,7 @@ export default function ProgressPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-100 px-6 md:px-24 py-10 overflow-hidden">
-       <div className="flex justify-end">
+       <div className="flex justify-front">
     <Link href="/nutrition" className="text-black hover:text-purple-800 font-bold text-bg bg-white/70 hover:bg-white/90 px-4 py-2 transition duration-200">
       ← Back to Nutrition
     </Link>

@@ -184,3 +184,71 @@ export async function createMealPlan(data: any) {
   return res.json();
 }
 
+// ——— Emergency ———
+
+const EMERGENCY_API = `${API}/emergency`;
+
+export async function fetchEmergencyCases() {
+  const res = await fetch(`${EMERGENCY_API}/emergency-cases/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch emergency cases');
+  return res.json();
+}
+
+export async function createEmergencyCase(data: any) {
+  const res = await fetch(`${EMERGENCY_API}/emergency-cases/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to create emergency case');
+  return res.json();
+}
+
+export async function fetchTriageLogs() {
+  const res = await fetch(`${EMERGENCY_API}/triage-logs/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch triage logs');
+  return res.json();
+}
+
+export async function createTriageLog(data: any) {
+  const res = await fetch(`${EMERGENCY_API}/triage-logs/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to create triage log');
+  return res.json();
+}
+
+export async function fetchEmergencyReferrals() {
+  const res = await fetch(`${EMERGENCY_API}/referrals/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch referrals');
+  return res.json();
+}
+
+export async function createReferral(data: any) {
+  const res = await fetch(`${EMERGENCY_API}/referrals/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to create referral');
+  return res.json();
+}
+
+export async function fetchFirstAidInventory() {
+  const res = await fetch(`${EMERGENCY_API}/first-aid-inventory/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch first aid inventory');
+  return res.json();
+}
+
+export async function updateFirstAidItem(id: number, data: any) {
+  const res = await fetch(`${EMERGENCY_API}/first-aid-inventory/${id}/`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to update first aid item');
+  return res.json();
+}
+
