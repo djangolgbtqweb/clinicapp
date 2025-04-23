@@ -287,3 +287,30 @@ export async function fetchLabResults() {
   if (!res.ok) throw new Error('Failed to fetch lab results');
   return res.json();
 }
+
+// src/lib/api.ts
+const STI_API = `${API}/stis`;
+
+export async function fetchDiagnoses() {
+  const res = await fetch(`${STI_API}/diagnoses/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to load diagnoses');
+  return res.json();
+}
+
+export async function fetchMedications() {
+  const res = await fetch(`${STI_API}/medications/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to load medications');
+  return res.json();
+}
+
+export async function fetchEducationMaterials() {
+  const res = await fetch(`${STI_API}/education-materials/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to load education materials');
+  return res.json();
+}
+
+export async function fetchFollowups() {
+  const res = await fetch(`${STI_API}/followups/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to load follow-ups');
+  return res.json();
+}
