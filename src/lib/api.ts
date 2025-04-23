@@ -252,3 +252,17 @@ export async function updateFirstAidItem(id: number, data: any) {
   return res.json();
 }
 
+// ——— Chronic Disease Management ———
+const CHRONIC_DISEASE_API = `${API}/chronic-disease-management`;
+
+export async function fetchDiseases() {
+  const res = await fetch(`${CHRONIC_DISEASE_API}/diseases/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch diseases');
+  return res.json();
+}
+
+export async function fetchFollowUps() {
+  const res = await fetch(`${CHRONIC_DISEASE_API}/follow-ups/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch follow-ups');
+  return res.json();
+}
