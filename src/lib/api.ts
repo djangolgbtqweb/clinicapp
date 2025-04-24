@@ -314,3 +314,59 @@ export async function fetchFollowups() {
   if (!res.ok) throw new Error('Failed to load follow-ups');
   return res.json();
 }
+
+// lib/api.ts
+const PHARMACY_API = `${API}/pharmacy`;
+
+export async function fetchPharmacyMedications() {
+  const res = await fetch(`${PHARMACY_API}/medications/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch medications');
+  return res.json();
+}
+
+export async function fetchTotalCost(id: number) {
+  const res = await fetch(`${PHARMACY_API}/medications/${id}/total-cost/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch total cost');
+  return res.json();
+}
+
+export async function fetchPrescriptions() {
+  const res = await fetch(`${PHARMACY_API}/prescriptions/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch prescriptions');
+  return res.json();
+}
+
+export async function fetchDispensingHistory() {
+  const res = await fetch(`${PHARMACY_API}/dispensing-history/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch dispensing history');
+  return res.json();
+}
+
+export async function fetchRestockingAlerts() {
+  const res = await fetch(`${PHARMACY_API}/restocking-alerts/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch restocking alerts');
+  return res.json();
+}
+
+// ——— Resource Management ———
+const RM_API = `${API}/resource-management`;
+export async function fetchRooms() {
+  const res = await fetch(`${RM_API}/rooms/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch rooms');
+  return res.json();
+}
+export async function fetchRoomAssignments() {
+  const res = await fetch(`${RM_API}/room-assignments/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch room assignments');
+  return res.json();
+}
+export async function fetchResourceEquipment() {
+  const res = await fetch(`${RM_API}/equipment/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch equipment');
+  return res.json();
+}
+export async function fetchEquipmentBookings() {
+  const res = await fetch(`${RM_API}/equipment-bookings/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch equipment bookings');
+  return res.json();
+}
