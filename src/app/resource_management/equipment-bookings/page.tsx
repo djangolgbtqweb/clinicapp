@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { fetchEquipmentBookings, fetchResourceEquipment } from 'lib/api';
 import { CalendarCheck2, Search, Loader2, Wrench, Laptop2, Stethoscope } from 'lucide-react';
 import dayjs from 'dayjs';
+import Link from 'next/link';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 
 type Booking = {
   id: number;
@@ -59,16 +61,26 @@ export default function EquipmentBookingsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white to-gray-50 px-6 py-10">
+    <main className="min-h-screen bg-gradient-to-br from-black to-white px-6 py-10 ">
+      {/* Back to Dashboard */}
+    <div>
+        <Link
+          href="/resource_management"
+          className="flex items-center text-white hover:text-white transition"
+        >
+          <ArrowLeft className="w-7 h-4 mr-1 " />
+          Resource Hub
+        </Link>
+      </div>
       <header className="flex items-center justify-between mb-10">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">🔧 Equipment Bookings</h1>
-          <p className="text-gray-500">Track usage and availability of critical equipment</p>
+          <h1 className="text-3xl font-bold text-yellow-300">🔧 Equipment Bookings</h1>
+          <p className="text-yellow-300">Track usage and availability of critical equipment</p>
         </div>
         <div className="relative w-72">
           <input
             type="text"
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 pl-10 shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 pl-10 shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 mb-20 text-orange-100 font-bold"
             placeholder="Search by equipment or staff..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}

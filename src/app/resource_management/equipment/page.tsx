@@ -1,5 +1,8 @@
 'use client';
 
+
+import Link from 'next/link';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { fetchResourceEquipment } from 'lib/api';
 import {
@@ -49,6 +52,16 @@ export default function EquipmentPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-white to-gray-50 px-6 py-10">
+      {/* Back to Dashboard */}
+    <div>
+        <Link
+          href="/resource_management"
+          className="flex items-center text-black hover:text-black transition"
+        >
+          <ArrowLeft className="w-7 h-4 mr-1 " />
+          Resource Hub
+        </Link>
+      </div>
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-10">
         <div>
           <h1 className="text-3xl font-bold text-gray-800">🔍 Equipment Inventory</h1>
@@ -60,7 +73,7 @@ export default function EquipmentPage() {
           <input
             type="text"
             placeholder="Search equipment..."
-            className="w-72 border border-gray-300 rounded-lg px-4 py-2 pl-10 shadow-sm focus:outline-none focus:ring focus:ring-indigo-200"
+            className="w-72 border border-gray-300 rounded-lg px-4 py-2 pl-10 shadow-sm focus:outline-none focus:ring focus:ring-indigo-200 mb-20"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />

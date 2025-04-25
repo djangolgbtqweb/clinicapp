@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { fetchRooms } from 'lib/api';
 import { PlusCircle } from 'lucide-react';
 import Link from 'next/link';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 
 type Room = {
   id: number;
@@ -31,8 +32,18 @@ export default function RoomListPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
+      {/* Back to Dashboard */}
+    <div>
+        <Link
+          href="/resource_management"
+          className="flex items-center text-black hover:text-black transition"
+        >
+          <ArrowLeft className="w-7 h-4 mr-1" />
+          Resource Hub
+        </Link>
+      </div>
       <header className="p-6 border-b bg-white shadow-sm">
-        <h1 className="text-2xl font-semibold text-gray-800">🏢 Facility Rooms</h1>
+        <h1 className="text-2xl font-semibold text-gray-800 ">🏢 Facility Rooms</h1>
         <p className="text-sm text-gray-500">Track all clinic rooms and their status.</p>
       </header>
 

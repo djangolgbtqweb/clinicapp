@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { fetchRoomAssignments, fetchRooms } from 'lib/api';
 import { CalendarDays, User2, Search, Loader2, DoorOpen } from 'lucide-react';
 import dayjs from 'dayjs';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 
 type Room = {
   id: number;
@@ -54,11 +56,21 @@ export default function RoomAssignmentsPage() {
   });
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-white p-6">
+    <main className="min-h-screen bg-gradient-to-br from-black to-white p-6">
+    {/* Back to Dashboard */}
+    <div>
+        <Link
+          href="/resource_management"
+          className="flex items-center text-white hover:text-yellow-300 transition mb-10"
+        >
+          <ArrowLeft className="w-4 h-4 mr-1" />
+          Resource Hub
+        </Link>
+      </div>
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-10">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">🗓️ Room Assignments</h1>
-          <p className="text-gray-500 mt-1">Overview of all room assignments with staff & patient mapping</p>
+          <h1 className="text-2xl font-bold text-white">🗓️ Room Assignments</h1>
+          <p className="text-white mt-1 ">Overview of all room assignments with staff & patient mapping</p>
         </div>
         <div className="relative mt-4 sm:mt-0">
           <input

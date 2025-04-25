@@ -8,6 +8,7 @@ import {
   fetchResourceEquipment,
   fetchEquipmentBookings,
 } from 'lib/api';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 
 export default function ResourceManagementDashboard() {
   const [counts, setCounts] = useState({
@@ -30,6 +31,16 @@ export default function ResourceManagementDashboard() {
 
   return (
     <div className="flex h-screen bg-gray-100">
+      {/* Back to Dashboard */}
+      <div>
+        <Link
+          href="/"
+          className="flex items-center text-black hover:text-black transition"
+        >
+          <ArrowLeft className="w-4 h-4 mr-1" />
+          Rsesource Management
+        </Link>
+      </div>
       {/* Sidebar */}
       <aside className="w-64 bg-white shadow-md h-full p-6 border-r">
         <h2 className="text-2xl font-bold text-blue-800 mb-8">📦 Resource Hub</h2>
