@@ -370,3 +370,93 @@ export async function fetchEquipmentBookings() {
   if (!res.ok) throw new Error('Failed to fetch equipment bookings');
   return res.json();
 }
+
+// lib/api.ts
+
+// —— Billing & Payments API library ——
+// Ensure this points to your Django backend's billing-payments routes
+const BILLING_API = `${API}/billing-payments`;
+
+// Service type including patient reference
+export interface Service {
+  id: number;
+  patient: number;           // ID of the patient associated with this service
+  patient_name?: string;     // (Optional) included if serializer exposes patient name
+  name: string;
+  price: number;
+}
+
+// Invoice type
+export interface Invoice {
+  id: number;
+  patient: number;
+  patient_name?: string;
+  date: string;
+  services: number[];        // Array of service IDs
+  total_amount: number;
+  paid: boolean;
+}
+
+// Payment type
+export interface Payment {
+  id: number;
+  invoice: number;
+  amount_paid: number;
+  payment_method: string;
+  date: string;
+}
+
+// Fetch all services
+export async function fetchServices(): Promise<Service[]> {
+  const res = await fetch(`${BILLING_API}/services/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch services');
+  return res.json();
+}
+
+// Create a new service (requires patient ID)
+export async function createService(data: { patient: number; name: string; price: number }): Promise<Service> {
+  const res = await fetch(`${BILLING_API}/services/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to create service');
+  return res.json();
+}
+
+// Fetch all invoices
+export async function fetchInvoices(): Promise<Invoice[]> {
+  const res = await fetch(`${BILLING_API}/invoices/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch invoices');
+  return res.json();
+}
+
+// Create a new invoice (requires patient, services list)
+export async function createInvoice(data: { patient: number; services: number[]; date: string; total_amount: number; paid: boolean }): Promise<Invoice> {
+  const res = await fetch(`${BILLING_API}/invoices/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to create invoice');
+  return res.json();
+}
+
+// Fetch all payments
+export async function fetchPayments(): Promise<Payment[]> {
+  const res = await fetch(`${BILLING_API}/payments/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch payments');
+  return res.json();
+}
+
+// Create a new payment (requires invoice ID)
+export async function createPayment(data: { invoice: number; amount_paid: number; payment_method: string; date: string }): Promise<Payment> {
+  const res = await fetch(`${BILLING_API}/payments/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to create payment');
+  return res.json();
+}
+

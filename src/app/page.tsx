@@ -26,7 +26,7 @@ export default function Dashboard() {
           <a href="/resource_management" className="block hover:text-cyan-400">Resource Mgmt</a>
 
           <div className="mt-4 text-xs uppercase text-gray-400">Admin</div>
-          <a href="/billing_payments" className="block hover:text-cyan-400">Billing</a>
+          <a href="/billing-payments" className="block hover:text-cyan-400">Billing</a>
           <a href="/staff" className="block hover:text-cyan-400">Staff</a>
           <a href="/internal_communication" className="block hover:text-cyan-400">Communication</a>
           <a href="/admin_dashboard" className="block hover:text-cyan-400">Admin Dashboard</a>
