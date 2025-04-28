@@ -460,3 +460,36 @@ export async function createPayment(data: { invoice: number; amount_paid: number
   return res.json();
 }
 
+// src/lib/api.ts
+
+// ——— Staff & Scheduling ———
+const STAFF_API = `${API}/staff`;
+
+// Fetch all staff members
+export async function fetchStaffMembers() {
+  const res = await fetch(`${STAFF_API}/staff/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch staff members');
+  return res.json();
+}
+
+// Fetch duty roster entries
+export async function fetchDutyRoster() {
+  const res = await fetch(`${STAFF_API}/duty-roster/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch duty roster');
+  return res.json();
+}
+
+// Fetch leave requests
+export async function fetchLeaveRequests() {
+  const res = await fetch(`${STAFF_API}/leave-requests/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch leave requests');
+  return res.json();
+}
+
+// Fetch on-call schedule
+export async function fetchOnCallSchedule() {
+  const res = await fetch(`${STAFF_API}/on-call-schedule/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch on-call schedule');
+  return res.json();
+}
+
