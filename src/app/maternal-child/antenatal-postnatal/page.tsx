@@ -1,13 +1,14 @@
-import { fetchAntenatalPostnatalRecords } from 'lib/api';
+// src/app/maternal-child-health/antenatal-postnatal/page.tsx
+
 import Link from 'next/link';
 import {
   ArrowLeft,
   FileText,
-  AlertCircle,
-  User,
   CalendarDays,
+  User,
   Stethoscope,
 } from 'lucide-react';
+import { fetchAntenatalPostnatalRecords } from 'lib/api';
 
 const PlaceholderCard = () => (
   <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-slate-700 shadow-md transition-all space-y-4 animate-pulse">
@@ -46,13 +47,17 @@ const PlaceholderCard = () => (
 export default async function AntenatalPostnatalPage() {
   const records = await fetchAntenatalPostnatalRecords();
 
+  // if there are no real records, render 3 placeholders
   const dataToRender = records.length === 0 ? Array.from({ length: 3 }) : records;
 
   return (
     <main className="min-h-screen px-4 py-6 md:px-12 space-y-8 bg-slate-50 dark:bg-slate-900">
       {/* Header */}
       <header className="flex items-center justify-between">
-        <Link href="/maternal-child" className="text-sm text-pink-600 flex items-center hover:underline">
+        <Link
+          href="/maternal-child-health"
+          className="text-sm text-pink-600 flex items-center hover:underline"
+        >
           <ArrowLeft className="w-4 h-4 mr-1" />
           Back to Dashboard
         </Link>
@@ -64,7 +69,9 @@ export default async function AntenatalPostnatalPage() {
       {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {records.length === 0
-          ? dataToRender.map((_, index) => <PlaceholderCard key={index} />)
+          ? dataToRender.map((_: unknown, index: number) => (
+              <PlaceholderCard key={index} />
+            ))
           : records.map((r: any) => (
               <div
                 key={r.id}
@@ -74,11 +81,15 @@ export default async function AntenatalPostnatalPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-pink-600">
                     <FileText className="w-4 h-4" />
-                    <span className="text-sm font-medium">Record #{r.id ?? '---'}</span>
+                    <span className="text-sm font-medium">
+                      Record #{r.id ?? '—'}
+                    </span>
                   </div>
                   <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
                     <CalendarDays className="w-4 h-4" />
-                    {r.record_date ? new Date(r.record_date).toLocaleDateString() : '---'}
+                    {r.record_date
+                      ? new Date(r.record_date).toLocaleDateString()
+                      : '—'}
                   </div>
                 </div>
 

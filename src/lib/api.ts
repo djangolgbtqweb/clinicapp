@@ -517,4 +517,10 @@ export async function fetchAdminMessages() {
   return res.json();
 }
 
+export async function fetchInventoryItems() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/emergency/inventory/`);
+  if (!res.ok) throw new Error("Failed to fetch inventory items");
+  return res.json();
+}
+
 

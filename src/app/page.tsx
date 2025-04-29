@@ -1,3 +1,7 @@
+
+
+import React from "react";
+
 export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-100 font-mono grid grid-cols-1 lg:grid-cols-[240px_1fr]">

@@ -1,4 +1,5 @@
 // src/app/maternal-child/vaccinations/page.tsx
+
 import { fetchVaccinationRecords } from 'lib/api';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
@@ -6,7 +7,7 @@ import { ArrowLeft } from 'lucide-react';
 export default async function VaccinationsPage() {
   const records = await fetchVaccinationRecords();
 
-  // If no real records yet, render 3 placeholder objects
+  // If no real records yet, render 3 placeholders
   const toRender =
     records.length > 0
       ? records
@@ -22,7 +23,10 @@ export default async function VaccinationsPage() {
     <main className="min-h-screen bg-slate-50 dark:bg-slate-900 space-y-8 px-4 py-6 md:px-12">
       {/* Header */}
       <header className="flex items-center justify-between">
-        <Link href="/maternal-child" className="text-sm text-pink-600 flex items-center hover:underline">
+        <Link
+          href="/maternal-child"
+          className="text-sm text-pink-600 flex items-center hover:underline"
+        >
           <ArrowLeft className="w-4 h-4 mr-1" /> Back to Dashboard
         </Link>
         <h1 className="text-3xl font-semibold text-slate-800 dark:text-white flex items-center gap-2">
@@ -32,7 +36,7 @@ export default async function VaccinationsPage() {
 
       {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {toRender.map((v: any, i) => (
+        {toRender.map((v: any, i: number) => (
           <div
             key={v.id ?? `placeholder-${i}`}
             className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-all space-y-4 border border-gray-200 dark:border-slate-700"
@@ -82,4 +86,3 @@ export default async function VaccinationsPage() {
     </main>
   );
 }
-

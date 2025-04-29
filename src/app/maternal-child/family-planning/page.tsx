@@ -1,4 +1,5 @@
 // src/app/maternal-child/family-planning/page.tsx
+
 import { fetchFamilyPlanning } from 'lib/api';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
@@ -22,7 +23,10 @@ export default async function FamilyPlanningPage() {
     <main className="min-h-screen bg-slate-50 dark:bg-slate-900 space-y-8 px-4 py-6 md:px-12">
       {/* Header */}
       <header className="flex items-center justify-between">
-        <Link href="/maternal-child" className="text-sm text-pink-600 flex items-center hover:underline">
+        <Link
+          href="/maternal-child"
+          className="text-sm text-pink-600 flex items-center hover:underline"
+        >
           <ArrowLeft className="w-4 h-4 mr-1" /> Back to Dashboard
         </Link>
         <h1 className="text-3xl font-semibold text-slate-800 dark:text-white flex items-center gap-2">
@@ -32,7 +36,7 @@ export default async function FamilyPlanningPage() {
 
       {/* Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {toRender.map((f: any, i) => (
+        {toRender.map((f: any, i: number) => (
           <div
             key={f.id ?? `placeholder-${i}`}
             className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-slate-700 shadow-md hover:shadow-lg transition-all space-y-4"
@@ -51,7 +55,9 @@ export default async function FamilyPlanningPage() {
 
             {/* Patient ID */}
             <div className="text-sm text-slate-700 dark:text-slate-200">
-              <span className="font-semibold text-purple-400">Patient ID:</span>{' '}
+              <span className="font-semibold text-purple-400">
+                Patient ID:
+              </span>{' '}
               {f.patient ?? 'Awaiting Patient ID…'}
             </div>
 

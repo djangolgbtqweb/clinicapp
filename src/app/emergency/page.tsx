@@ -1,7 +1,8 @@
 "use client";
 
-import Link from 'next/link';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, ReactNode } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   fetchEmergencyCases,
   fetchTriageLogs,
@@ -9,7 +10,6 @@ import {
   fetchFirstAidInventory,
 } from "lib/api";
 import { AlertTriangle, Stethoscope, Truck, PackageCheck } from "lucide-react";
-import { motion } from "framer-motion";
 
 export default function EmergencyLandingPage() {
   const [emergencyCases, setEmergencyCases] = useState<any[]>([]);
@@ -41,14 +41,19 @@ export default function EmergencyLandingPage() {
     loadData();
   }, []);
 
-  if (loading) 
-    return <div className="p-8 text-center text-gray-600 text-lg animate-pulse">🔄 Loading Emergency Department data…</div>;
-  if (error) 
-    return <div className="p-8 text-center text-red-600 text-lg">❌ {error}</div>;
+  if (loading)
+    return (
+      <div className="p-8 text-center text-gray-600 text-lg animate-pulse">
+        🔄 Loading Emergency Department data…
+      </div>
+    );
+  if (error)
+    return (
+      <div className="p-8 text-center text-red-600 text-lg">❌ {error}</div>
+    );
 
   return (
     <div className="p-6 md:p-10 space-y-10 bg-gray-100 min-h-screen">
-
       <div className="flex justify-end">
         <Link
           href="/"
@@ -67,10 +72,26 @@ export default function EmergencyLandingPage() {
       </motion.h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <SummaryCard title="Cases" value={emergencyCases.length} icon={<AlertTriangle className="text-red-500" size={28} />} />
-        <SummaryCard title="Triage Logs" value={triageLogs.length} icon={<Stethoscope className="text-indigo-600" size={28} />} />
-        <SummaryCard title="Referrals" value={referrals.length} icon={<Truck className="text-blue-600" size={28} />} />
-        <SummaryCard title="Inventory" value={inventory.length} icon={<PackageCheck className="text-green-600" size={28} />} />
+        <SummaryCard
+          title="Cases"
+          value={emergencyCases.length}
+          icon={<AlertTriangle className="text-red-500" size={28} />}
+        />
+        <SummaryCard
+          title="Triage Logs"
+          value={triageLogs.length}
+          icon={<Stethoscope className="text-indigo-600" size={28} />}
+        />
+        <SummaryCard
+          title="Referrals"
+          value={referrals.length}
+          icon={<Truck className="text-blue-600" size={28} />}
+        />
+        <SummaryCard
+          title="Inventory"
+          value={inventory.length}
+          icon={<PackageCheck className="text-green-600" size={28} />}
+        />
       </div>
 
       {/* Emergency Cases */}
@@ -79,10 +100,15 @@ export default function EmergencyLandingPage() {
           data={emergencyCases}
           renderItem={(c) => (
             <Card key={c.id}>
-              <p><strong>Patient:</strong> {c.patient_name}</p>
-              <p><strong>Condition:</strong> {c.condition}</p>
+              <p>
+                <strong>Patient:</strong> {c.patient_name}
+              </p>
+              <p>
+                <strong>Condition:</strong> {c.condition}
+              </p>
               <p className="text-sm text-gray-500">
-                <strong>Arrived:</strong> {new Date(c.arrival_time).toLocaleString()}
+                <strong>Arrived:</strong>{" "}
+                {new Date(c.arrival_time).toLocaleString()}
               </p>
             </Card>
           )}
@@ -96,10 +122,15 @@ export default function EmergencyLandingPage() {
           data={triageLogs}
           renderItem={(log) => (
             <Card key={log.id}>
-              <p><strong>Patient:</strong> {log.emergency_case.patient_name}</p>
-              <p><strong>Notes:</strong> {log.triage_notes}</p>
+              <p>
+                <strong>Patient:</strong> {log.emergency_case.patient_name}
+              </p>
+              <p>
+                <strong>Notes:</strong> {log.triage_notes}
+              </p>
               <p className="text-sm text-gray-500">
-                <strong>Time:</strong> {new Date(log.triage_time).toLocaleString()}
+                <strong>Time:</strong>{" "}
+                {new Date(log.triage_time).toLocaleString()}
               </p>
             </Card>
           )}
@@ -113,9 +144,15 @@ export default function EmergencyLandingPage() {
           data={referrals}
           renderItem={(r) => (
             <Card key={r.id}>
-              <p><strong>Patient:</strong> {r.emergency_case.patient_name}</p>
-              <p><strong>Facility:</strong> {r.facility_name}</p>
-              <p><strong>Reason:</strong> {r.reason}</p>
+              <p>
+                <strong>Patient:</strong> {r.emergency_case.patient_name}
+              </p>
+              <p>
+                <strong>Facility:</strong> {r.facility_name}
+              </p>
+              <p>
+                <strong>Reason:</strong> {r.reason}
+              </p>
               <p className="text-sm text-gray-500">
                 <strong>On:</strong> {new Date(r.referred_on).toLocaleString()}
               </p>
@@ -131,24 +168,36 @@ export default function EmergencyLandingPage() {
           data={inventory}
           renderItem={(item) => (
             <Card key={item.id}>
-              <p><strong>Item:</strong> {item.item_name}</p>
-              <p><strong>Qty:</strong> {item.quantity}</p>
+              <p>
+                <strong>Item:</strong> {item.item_name}
+              </p>
+              <p>
+                <strong>Qty:</strong> {item.quantity}
+              </p>
               <p className="text-sm text-gray-500">
-                <strong>Updated:</strong> {new Date(item.last_updated).toLocaleString()}
+                <strong>Updated:</strong>{" "}
+                {new Date(item.last_updated).toLocaleString()}
               </p>
             </Card>
           )}
           fallback="🧰 First Aid Inventory is empty or not updated. Supply readiness is essential during emergencies."
         />
       </Section>
-
     </div>
   );
 }
 
 // — reusable components —
 
-const SummaryCard = ({ title, value, icon }: { title: string; value: number; icon: JSX.Element }) => (
+const SummaryCard = ({
+  title,
+  value,
+  icon,
+}: {
+  title: string;
+  value: number;
+  icon: ReactNode;
+}) => (
   <motion.div
     className="p-5 bg-white shadow-lg rounded-2xl flex items-center justify-between"
     initial={{ opacity: 0, y: 10 }}
@@ -159,39 +208,44 @@ const SummaryCard = ({ title, value, icon }: { title: string; value: number; ico
       <p className="text-sm text-gray-500">{title}</p>
       <p className="text-2xl font-bold">{value}</p>
     </div>
-    <div className="p-2 bg-gray-100 rounded-full">
-      {icon}
-    </div>
+    <div className="p-2 bg-gray-100 rounded-full">{icon}</div>
   </motion.div>
 );
 
-const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
+const Section = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) => (
   <section>
     <h2 className="text-2xl font-bold mb-4 text-gray-700">{title}</h2>
     {children}
   </section>
 );
 
-const CardGrid = ({
-  data,
-  renderItem,
-  fallback,
-}: {
+type CardGridProps = {
   data: any[];
-  renderItem: (item: any) => JSX.Element;
+  renderItem: (item: any) => ReactNode;
   fallback: string;
-}) => (
+};
+const CardGrid = ({ data, renderItem, fallback }: CardGridProps) => (
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-    {data.length > 0 ? data.map(renderItem) : (
+    {data.length > 0 ? (
+      data.map((item) => renderItem(item))
+    ) : (
       <div className="col-span-full bg-white border-l-4 border-red-500 p-4 rounded-lg shadow text-center">
-        <p className="text-red-600 text-lg font-semibold mb-1">⚠️ Attention Needed</p>
+        <p className="text-red-600 text-lg font-semibold mb-1">
+          ⚠️ Attention Needed
+        </p>
         <p className="text-gray-700">{fallback}</p>
       </div>
     )}
   </div>
 );
 
-const Card = ({ children }: { children: React.ReactNode }) => (
+const Card = ({ children }: { children: ReactNode }) => (
   <motion.div
     className="p-4 bg-white rounded-xl shadow hover:shadow-lg transition"
     whileHover={{ scale: 1.02 }}
@@ -199,4 +253,3 @@ const Card = ({ children }: { children: React.ReactNode }) => (
     {children}
   </motion.div>
 );
-
