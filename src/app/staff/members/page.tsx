@@ -34,7 +34,6 @@ export default function StaffMembersPage() {
     );
   }
 
-  // Group staff by role
   const groupedStaff = staff.reduce((acc, member) => {
     const role = member.role.toLowerCase();
     if (!acc[role]) acc[role] = [];
@@ -45,12 +44,12 @@ export default function StaffMembersPage() {
   const roles = ['doctor', 'nurse', 'labtech', 'admin'];
 
   return (
-    <div className="flex bg-black text-gray-100 min-h-screen">
+    <div className="flex bg-black text-white min-h-screen">
       {/* Sidebar */}
-      <aside className="w-60 bg-gray-900 border-r border-gray-800 p-6 flex flex-col">
+      <aside className="w-60 bg-black border-r border-gray-900 p-6 flex flex-col">
         <Link
           href="/staff"
-          className="flex items-center text-gray-400 hover:text-gray-100 mb-10 transition"
+          className="flex items-center text-white hover:text-white mb-10 transition"
         >
           <ArrowLeft className="w-5 h-5 mr-2" />
           Back
@@ -65,8 +64,8 @@ export default function StaffMembersPage() {
                 }
                 className={`w-full text-left text-lg font-semibold rounded-md px-3 py-2 transition-colors ${
                   activeRole === role
-                    ? 'bg-gray-700 text-blue-400'
-                    : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                    ? 'bg-black text-blue-400'
+                    : 'text-gray-400 hover:text-white hover:bg-black'
                 }`}
               >
                 {role === 'labtech'
@@ -97,9 +96,10 @@ export default function StaffMembersPage() {
           ).map((member) => (
             <div
               key={member.id}
-              className="bg-gray-800 rounded-xl p-6 flex flex-col items-center hover:bg-gray-700 transition"
+              className="bg-black rounded-xl p-6 flex flex-col items-center hover:bg-black transition"
             >
-              {/* Profile Image */}
+           
+              {/* Profile Image or Initial */}
               {member.profile_picture ? (
                 <img
                   src={member.profile_picture}
@@ -107,7 +107,7 @@ export default function StaffMembersPage() {
                   className="w-24 h-24 rounded-full object-cover mb-4 shadow-lg"
                 />
               ) : (
-                <div className="w-24 h-24 rounded-full bg-gray-600 flex items-center justify-center mb-4 text-2xl text-white shadow-lg">
+                <div className="w-24 h-24 rounded-full bg-gray-700 flex items-center justify-center mb-4 text-2xl text-white shadow-lg">
                   {member.name.charAt(0)}
                 </div>
               )}
@@ -127,3 +127,4 @@ export default function StaffMembersPage() {
     </div>
   );
 }
+

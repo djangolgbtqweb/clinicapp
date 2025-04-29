@@ -76,18 +76,18 @@ export default function DutyRosterPage() {
                   opacity: 0,
                   transform: 'translateY(10px)',
                 }}
-                className="border-b border-white hover:bg-white hover:text-black transition-all duration-300"
+                className="border-b border-black hover:bg-white hover:text-black transition-all duration-300"
               >
                 <td className="px-6 py-4 whitespace-nowrap">{duty.staff_member}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{duty.date}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{duty.shift_time}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {duty.assigned ? (
-                    <span className="inline-block px-2 py-0.5 bg-white text-black rounded-full text-xs font-semibold">
+                    <span className="inline-block px-2 py-0.5 bg-black text-white rounded-full text-xs font-semibold">
                       YES
                     </span>
                   ) : (
-                    <span className="inline-block px-2 py-0.5 bg-white text-black rounded-full text-xs font-semibold">
+                    <span className="inline-block px-2 py-0.5 bg-black text-white rounded-full text-xs font-semibold">
                       NO
                     </span>
                   )}

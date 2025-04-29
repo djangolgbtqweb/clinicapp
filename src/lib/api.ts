@@ -493,3 +493,28 @@ export async function fetchOnCallSchedule() {
   return res.json();
 }
 
+// ——— Internal Communication ———
+const COMMUNICATION_API = `${API}/internal-communication`;
+
+// Fetch notices
+export async function fetchNotices() {
+  const res = await fetch(`${COMMUNICATION_API}/notices/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch notices');
+  return res.json();
+}
+
+// Fetch shift updates
+export async function fetchShiftUpdates() {
+  const res = await fetch(`${COMMUNICATION_API}/shift-updates/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch shift updates');
+  return res.json();
+}
+
+// Fetch admin messages
+export async function fetchAdminMessages() {
+  const res = await fetch(`${COMMUNICATION_API}/messages/`, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Failed to fetch admin messages');
+  return res.json();
+}
+
+
