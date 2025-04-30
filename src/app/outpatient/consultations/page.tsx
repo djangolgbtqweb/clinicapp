@@ -3,7 +3,13 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 export default async function ConsultationsPage() {
-  const consultations = await fetchConsultations();
+  let consultations = [];
+
+  try {
+    consultations = await fetchConsultations();
+  } catch (e) {
+    console.error("Error loading consultations:", e);
+  }
 
   return (
     <main className="min-h-screen p-6 bg-gray-100 dark:bg-gray-900 space-y-8">
@@ -21,6 +27,11 @@ export default async function ConsultationsPage() {
           Back to Dashboard
         </Link>
       </div>
+
+      {/* Error Message if no data */}
+      {consultations.length === 0 && (
+        <div className="text-red-500 text-sm">No consultations found or failed to load.</div>
+      )}
 
       {/* Consultations Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -44,4 +55,3 @@ export default async function ConsultationsPage() {
     </main>
   );
 }
-

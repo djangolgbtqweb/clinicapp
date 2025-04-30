@@ -1,4 +1,5 @@
-const API = `${process.env.NEXT_PUBLIC_API_URL}/api` || "http://127.0.0.1:8000/api";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
+
 
 
 // ——— Patients ———
@@ -29,9 +30,28 @@ export async function fetchQueue() {
 
 export async function fetchConsultations() {
   const res = await fetch(`${API}/outpatient/consultations/`, { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to fetch consultations");
-  return res.json();
+
+  console.log("Fetch status:", res.status);
+
+  if (!res.ok) {
+    const errorText = await res.text();
+    console.error("Fetch error body:", errorText);
+    throw new Error("Failed to fetch consultations");
+  }
+
+  try {
+    const data = await res.json();
+    if (!Array.isArray(data)) {
+      console.error("Expected array, got:", data);
+      throw new Error("Unexpected data format");
+    }
+    return data;
+  } catch (e) {
+    console.error("Error parsing JSON:", e);
+    throw new Error("Invalid JSON response");
+  }
 }
+
 
 export async function fetchReferrals() {
   const res = await fetch(`${API}/outpatient/referrals/`, { cache: "no-store" });

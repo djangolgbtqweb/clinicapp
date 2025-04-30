@@ -1,4 +1,4 @@
-// src/app/outpatient/page.tsx
+
 import {
   fetchQueue,
   fetchConsultations,
@@ -8,12 +8,33 @@ import { ArrowRight, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function OutpatientLandingPage() {
-  // Fetch data concurrently
-  const [queue, consultations, referrals] = await Promise.all([
-    fetchQueue(),
-    fetchConsultations(),
-    fetchReferrals(),
-  ]);
+  let queue = [];
+  let consultations = [];
+  let referrals = [];
+
+  try {
+    // Fetch all 3 datasets concurrently with error protection
+    const [queueData, consultData, referralData] = await Promise.all([
+      fetchQueue().catch((e) => {
+        console.error("Queue fetch failed:", e);
+        return [];
+      }),
+      fetchConsultations().catch((e) => {
+        console.error("Consultations fetch failed:", e);
+        return [];
+      }),
+      fetchReferrals().catch((e) => {
+        console.error("Referrals fetch failed:", e);
+        return [];
+      }),
+    ]);
+
+    queue = queueData;
+    consultations = consultData;
+    referrals = referralData;
+  } catch (e) {
+    console.error("Unexpected error in OutpatientLandingPage:", e);
+  }
 
   const cardStyle =
     'bg-white dark:bg-slate-900 rounded-2xl shadow-md p-5 border border-slate-200 hover:shadow-xl transition';
@@ -58,14 +79,11 @@ export default async function OutpatientLandingPage() {
                 className="text-sm bg-slate-50 dark:bg-slate-800 rounded-lg p-2"
               >
                 <p>
-                  <strong>Patient:</strong> {q.patient}
-                </p>
+                  <strong>Patient:</strong> {q.patient}</p>
                 <p>
-                  <strong>Status:</strong> {q.status}
-                </p>
+                  <strong>Status:</strong> {q.status}</p>
                 <p>
-                  <strong>Priority:</strong> {q.priority}
-                </p>
+                  <strong>Priority:</strong> {q.priority}</p>
               </li>
             ))}
           </ul>
@@ -90,11 +108,9 @@ export default async function OutpatientLandingPage() {
                 className="text-sm bg-slate-50 dark:bg-slate-800 rounded-lg p-2"
               >
                 <p>
-                  <strong>Doctor:</strong> {c.doctor_name}
-                </p>
+                  <strong>Doctor:</strong> {c.doctor_name}</p>
                 <p>
-                  <strong>Dx:</strong> {c.diagnosis}
-                </p>
+                  <strong>Dx:</strong> {c.diagnosis}</p>
               </li>
             ))}
           </ul>
@@ -119,11 +135,9 @@ export default async function OutpatientLandingPage() {
                 className="text-sm bg-slate-50 dark:bg-slate-800 rounded-lg p-2"
               >
                 <p>
-                  <strong>To:</strong> {r.referred_to}
-                </p>
+                  <strong>To:</strong> {r.referred_to}</p>
                 <p>
-                  <strong>Reason:</strong> {r.reason}
-                </p>
+                  <strong>Reason:</strong> {r.reason}</p>
               </li>
             ))}
           </ul>
@@ -132,7 +146,6 @@ export default async function OutpatientLandingPage() {
     </main>
   );
 }
-
 
 
 
