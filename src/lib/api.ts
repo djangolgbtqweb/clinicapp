@@ -4,20 +4,46 @@ const API = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
 
 // ——— Patients ———
 
+console.log("🌐 [lib/api] NEXT_PUBLIC_API_URL =", process.env.NEXT_PUBLIC_API_URL);
+
 export async function fetchPatients() {
-  const res = await fetch(`${API}/patients/`, { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to fetch patients");
-  return res.json();
+  const url = `${API}/patients/`;
+  console.log("🛠️ [lib/api] fetching from:", url);
+
+  const res = await fetch(url, { cache: "no-store" });
+  console.log("🛠️ [lib/api] fetch response status:", res.status);
+
+  if (!res.ok) {
+    const text = await res.text();
+    console.error("🛠️ [lib/api] fetch failed, response body:", text);
+    throw new Error("Failed to fetch patients");
+  }
+
+  const json = await res.json();
+  console.log("🛠️ [lib/api] response JSON:", json);
+  return json;
 }
 
 export async function createPatient(data: any) {
-  const res = await fetch(`${API}/patients/`, {
+  const url = `${API}/patients/`;
+  console.log("🛠️ [lib/api] creating patient via:", url, data);
+
+  const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!res.ok) throw new Error("Failed to create patient");
-  return res.json();
+  console.log("🛠️ [lib/api] createPatient status:", res.status);
+
+  if (!res.ok) {
+    const text = await res.text();
+    console.error("🛠️ [lib/api] createPatient failed, response body:", text);
+    throw new Error("Failed to create patient");
+  }
+
+  const json = await res.json();
+  console.log("🛠️ [lib/api] createPatient response JSON:", json);
+  return json;
 }
 
 // ——— Outpatient ———
